@@ -36,8 +36,6 @@ public class DayResource extends BackendResource {
     @Path("/")
     public ExportPOJO getDays(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
         
-        redirect();
-        
         logger.info("download");
 
         List<?> pojos = null;
@@ -88,8 +86,6 @@ public class DayResource extends BackendResource {
             @QueryParam("count") int count
     ) {
         
-        redirect();
-        
         logger.info("download");
         List<ExportPOJO> pojos = null;
         try {
@@ -112,8 +108,6 @@ public class DayResource extends BackendResource {
     @PUT
     @Path("/")
     public ExportPOJO updateDays(ExportPOJO pojo) {
-        
-        redirect();
         
         logger.info("updateDays");
         logger.debug("pojo: {}", pojo);
