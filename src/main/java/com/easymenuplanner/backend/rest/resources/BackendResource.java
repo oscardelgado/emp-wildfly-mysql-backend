@@ -29,33 +29,9 @@ public class BackendResource {
 
     private final static Logger logger = LoggerFactory.getLogger(BackendResource.class);
     
-    @Context
-    protected HttpServletResponse servletResponse;
-    
-    @Context
-    protected HttpServletRequest servletRequest;
-    
-    protected void redirect() {
-        logger.info("redirect!");
-        String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), "easymenuplanerwildfly-ods.rhcloud.com");
-        if (servletRequest.getQueryString() != null) {
-            requestURL.concat("?").concat(servletRequest.getQueryString());
-        }
-        
-        try {
-            logger.info("url: " + requestURL);
-            servletResponse.sendRedirect(requestURL);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
-    }
-
     @GET
     @Path("/last-update-timestamp")
     public TimestampPOJO lastUpdateTimestamp(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
-        
-        redirect();
-        
         logger.info("lastUpdateTimestamp");
 
         ExportPOJO obtainedPojo = null;
