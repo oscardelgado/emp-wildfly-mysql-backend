@@ -1,5 +1,2 @@
-<%
-response.setStatus(301);
-response.setHeader( "Location", "http://easymenuplanerwildfly-ods.rhcloud.com" );
-response.setHeader( "Connection", "close" );
-%>
+This is v3!
+2017/09/05
