@@ -10,14 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,13 +38,16 @@ public class BackendResource {
     
     protected Response redirectWithHeader(ExportPOJO entity) {
     	logger.info("redirect with header!");
+    	logger.info("the content type is: " + servletRequest.getContentType());
     	
     	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
     	logger.info("url: " + requestURL);
     	
-    	Client client = new ResteasyClientBuilder().build();
-    	WebTarget target = client.target(requestURL);
-    	return target.request().post(Entity.entity(entity, javax.ws.rs.core.MediaType.MULTIPART_FORM_DATA));
+    	return null;
+    	
+//    	Client client = new ResteasyClientBuilder().build();
+//    	WebTarget target = client.target(requestURL);
+//    	return target.request().post(servletRequest.getContentType());
     }
     
     protected void redirectWithSendRedirect() {
