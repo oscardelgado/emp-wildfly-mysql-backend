@@ -10,9 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,9 +48,7 @@ public class BackendResource {
     	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
     	logger.info("url: " + requestURL);
     	
-    	return null;
-        
-        Client client = ResteasyClientBuilder.newClient();
+    	Client client = ResteasyClientBuilder.newClient();
     	WebTarget target = client.target(requestURL);
     	return target.request().post(Entity.entity(entity, servletRequest.getContentType()));
     }
