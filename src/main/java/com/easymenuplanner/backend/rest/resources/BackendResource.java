@@ -48,7 +48,7 @@ public class BackendResource {
     
        String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
        if (servletRequest.getQueryString() != null) {
-           requestURL.concat("?").concat(servletRequest.getQueryString());
+           requestURL = requestURL.concat("?").concat(servletRequest.getQueryString());
        }
        
        try {
