@@ -28,7 +28,7 @@ public class DayResource extends BackendResource {
     @Path("/")
     public ExportPOJO getDays(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
     	
-    	redirect();
+    	redirectWithSendRedirect();
 	    
 	    return null;
     	
@@ -82,7 +82,7 @@ public class DayResource extends BackendResource {
             @QueryParam("count") int count
     ) {
     	 
-    	 redirect();
+    	 redirectWithSendRedirect();
 	    
 	    return null;
     	 
@@ -109,7 +109,7 @@ public class DayResource extends BackendResource {
     @Path("/")
     public ExportPOJO updateDays(ExportPOJO pojo) {
     	
-    	redirect();
+    	redirectWithHeader();
 	    
 	    return null;
     	
