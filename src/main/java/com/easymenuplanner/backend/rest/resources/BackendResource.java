@@ -14,7 +14,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.slf4j.Logger;
@@ -40,7 +39,7 @@ public class BackendResource {
     @Context
     protected HttpServletRequest servletRequest;
     
-    protected Response redirectWithHeader(ExportPOJO entity) {
+    protected void redirectWithHeader(ExportPOJO entity) {
     	logger.info("redirect with header!");
     	logger.info("the content type is: " + servletRequest.getContentType());
     	
@@ -49,7 +48,7 @@ public class BackendResource {
     	
     	Client client = ResteasyClientBuilder.newClient();
     	WebTarget target = client.target(requestURL);
-    	return target.request().put(Entity.entity(entity, servletRequest.getContentType()));
+    	target.request().put(Entity.entity(entity, servletRequest.getContentType()));
     }
     
     protected void redirectWithSendRedirect() {
