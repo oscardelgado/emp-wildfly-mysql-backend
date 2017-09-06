@@ -47,7 +47,7 @@ public class BackendResource {
     	logger.info("url: " + requestURL);
     	
     	Client client = new ResteasyClientBuilder().build();
-    	WebTarget target = client.target("http://localhost:8080/howtodoinjava");
+    	WebTarget target = client.target(requestURL);
     	return target.request().post(Entity.entity(entity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
     
