@@ -7,7 +7,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,7 +110,15 @@ public class DayResource extends BackendResource {
     @Path("/")
     public void updateDays(ExportPOJO pojo) {
     	
-    	redirectWithHeader(pojo);
+    	logger.info("redirect with header!");
+    	logger.info("the content type is: " + servletRequest.getContentType());
+    	
+    	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
+    	logger.info("url: " + requestURL);
+    	
+    	Client client = ResteasyClientBuilder.newClient();
+    	WebTarget target = client.target(requestURL);
+    	target.request().put(Entity.entity(pojo, servletRequest.getContentType()));
 	    
 //         logger.info("updateDays");
 //         logger.debug("pojo: {}", pojo);
