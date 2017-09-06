@@ -29,47 +29,49 @@ public class DayResource extends BackendResource {
     public ExportPOJO getDays(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
     	
     	redirect();
+	    
+	    return null;
     	
-        logger.info("download");
+//         logger.info("download");
 
-        List<?> pojos = null;
+//         List<?> pojos = null;
 
-        if (encDevId != null) {
-            try {
-                pojos = (List<?>) em.createQuery("SELECT e FROM ExportPOJO e "
-                        + "WHERE e.accountName = :acc "
-                        + "AND e.deviceId = :dev "
-                        + "AND e.fromError = 0 "
-                        + "ORDER BY e.updateTimestamp DESC")
-                        .setParameter("acc", encAccName)
-                        .setParameter("dev", encDevId)
-                        .getSingleResult();
-            } catch (NoResultException e) {
-                return null;
-            }
-        } else {
-            pojos = em.createQuery("SELECT e FROM ExportPOJO e "
-                    + "WHERE e.accountName = :acc "
-                    + "AND e.fromError = 0 "
-                    + "ORDER BY e.updateTimestamp DESC")
-                    .setParameter("acc", encAccName)
-                    .setMaxResults(1)
-                    .getResultList();
-        }
-        if (pojos != null && !pojos.isEmpty()) {
-            final ExportPOJO exportPOJO = (ExportPOJO) pojos.get(0);
+//         if (encDevId != null) {
+//             try {
+//                 pojos = (List<?>) em.createQuery("SELECT e FROM ExportPOJO e "
+//                         + "WHERE e.accountName = :acc "
+//                         + "AND e.deviceId = :dev "
+//                         + "AND e.fromError = 0 "
+//                         + "ORDER BY e.updateTimestamp DESC")
+//                         .setParameter("acc", encAccName)
+//                         .setParameter("dev", encDevId)
+//                         .getSingleResult();
+//             } catch (NoResultException e) {
+//                 return null;
+//             }
+//         } else {
+//             pojos = em.createQuery("SELECT e FROM ExportPOJO e "
+//                     + "WHERE e.accountName = :acc "
+//                     + "AND e.fromError = 0 "
+//                     + "ORDER BY e.updateTimestamp DESC")
+//                     .setParameter("acc", encAccName)
+//                     .setMaxResults(1)
+//                     .getResultList();
+//         }
+//         if (pojos != null && !pojos.isEmpty()) {
+//             final ExportPOJO exportPOJO = (ExportPOJO) pojos.get(0);
             
-//            //FIXME: temporal fix because Proguard was changing jsonId field
-//            //Although it works, change to a regex to keep both a and jsonId. (Mixed app versions).
-//            if (exportPOJO.daysJSON != null) exportPOJO.daysJSON = exportPOJO.daysJSON.replace("\"a\":", "\"jsonId\":");
-//            if (exportPOJO.coursesJSON != null) exportPOJO.coursesJSON = exportPOJO.coursesJSON.replace("\"a\":", "\"jsonId\":");
-//            if (exportPOJO.courseIngredientJSONs != null) exportPOJO.courseIngredientJSONs = exportPOJO.courseIngredientJSONs.replace("\"a\":", "\"jsonId\":");
-//            if (exportPOJO.ingredientJSONs != null) exportPOJO.ingredientJSONs = exportPOJO.ingredientJSONs.replace("\"a\":", "\"jsonId\":");
+// //            //FIXME: temporal fix because Proguard was changing jsonId field
+// //            //Although it works, change to a regex to keep both a and jsonId. (Mixed app versions).
+// //            if (exportPOJO.daysJSON != null) exportPOJO.daysJSON = exportPOJO.daysJSON.replace("\"a\":", "\"jsonId\":");
+// //            if (exportPOJO.coursesJSON != null) exportPOJO.coursesJSON = exportPOJO.coursesJSON.replace("\"a\":", "\"jsonId\":");
+// //            if (exportPOJO.courseIngredientJSONs != null) exportPOJO.courseIngredientJSONs = exportPOJO.courseIngredientJSONs.replace("\"a\":", "\"jsonId\":");
+// //            if (exportPOJO.ingredientJSONs != null) exportPOJO.ingredientJSONs = exportPOJO.ingredientJSONs.replace("\"a\":", "\"jsonId\":");
             
-            return exportPOJO;
-        } else {
-            return null;
-        }
+//             return exportPOJO;
+//         } else {
+//             return null;
+//         }
     }
     
      @GET
@@ -81,23 +83,25 @@ public class DayResource extends BackendResource {
     ) {
     	 
     	 redirect();
+	    
+	    return null;
     	 
-        logger.info("download");
-        List<ExportPOJO> pojos = null;
-        try {
-            String sql = "SELECT e FROM ExportPOJO e "
-                    + "WHERE e.fromError = 0 ";
-            if (language != null) sql += "AND e.language = :language ";
-            sql += "ORDER BY e.updateTimestamp DESC";
-            final TypedQuery<ExportPOJO> q = em.createQuery(sql, ExportPOJO.class);
-            if (language != null) q.setParameter("language", language);
-            q.setFirstResult(start);
-            q.setMaxResults((count != 0)? count : MAX);
-            pojos = q.getResultList();
-        } catch (NoResultException e) {
-            return Collections.emptyList();
-        }
-        return pojos;
+//         logger.info("download");
+//         List<ExportPOJO> pojos = null;
+//         try {
+//             String sql = "SELECT e FROM ExportPOJO e "
+//                     + "WHERE e.fromError = 0 ";
+//             if (language != null) sql += "AND e.language = :language ";
+//             sql += "ORDER BY e.updateTimestamp DESC";
+//             final TypedQuery<ExportPOJO> q = em.createQuery(sql, ExportPOJO.class);
+//             if (language != null) q.setParameter("language", language);
+//             q.setFirstResult(start);
+//             q.setMaxResults((count != 0)? count : MAX);
+//             pojos = q.getResultList();
+//         } catch (NoResultException e) {
+//             return Collections.emptyList();
+//         }
+//         return pojos;
     }
 
     //TODO: change to manage only Days
@@ -106,12 +110,14 @@ public class DayResource extends BackendResource {
     public ExportPOJO updateDays(ExportPOJO pojo) {
     	
     	redirect();
+	    
+	    return null;
     	
-        logger.info("updateDays");
-        logger.debug("pojo: {}", pojo);
+//         logger.info("updateDays");
+//         logger.debug("pojo: {}", pojo);
 
-        saveOrUpdate(pojo);
-        return pojo;
+//         saveOrUpdate(pojo);
+//         return pojo;
     }
 
     private void saveOrUpdate(ExportPOJO pojo) {
