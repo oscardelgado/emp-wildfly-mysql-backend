@@ -37,15 +37,16 @@ public class BackendResource {
     @Context
     protected HttpServletRequest servletRequest;
     
-    protected Response redirect() {
+    protected void redirect() {
     	logger.info("redirect!");
-    	return Response.temporaryRedirect(URI.create(REDIRECT_HOST)).build();
+    	servletResponse.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+        servletResponse.setHeader("Location", REDIRECT_HOST);
     }
 //        logger.info("redirect!");
     
 //    https://stackoverflow.com/a/14951320/1464013
-//    httpResponse.setStatus(TEMPORARY_REDIRECT);
-//    httpResponse.setHeader("Location", redirectLocation);
+//    servletResponse.setStatus(TEMPORARY_REDIRECT);
+//    servletResponse.setHeader("Location", REDIRECT_HOST);
     
 //        String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
 //        if (servletRequest.getQueryString() != null) {
@@ -62,45 +63,45 @@ public class BackendResource {
 
     @GET
     @Path("/last-update-timestamp")
-    public Response lastUpdateTimestamp(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
+    public TimestampPOJO lastUpdateTimestamp(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
     	
-    	return redirect();
+    	redirect();
     	
-//        logger.info("lastUpdateTimestamp");
-//
-//        ExportPOJO obtainedPojo = null;
-//
-//        if (encDevId != null) {
-//            try {
-//                obtainedPojo = (ExportPOJO) em.createQuery("SELECT e FROM ExportPOJO e "
-//                        + "WHERE e.accountName = :acc "
-//                        + "AND e.deviceId = :dev "
-//                        + "AND e.fromError = 0 "
-//                        + "ORDER BY e.updateTimestamp DESC")
-//                        .setParameter("acc", encAccName)
-//                        .setParameter("dev", encDevId)
-//                        .getSingleResult();
-//            } catch (NoResultException e) {
-//                return null;
-//            }
-//        } else {
-//            List<?> pojos = null;
-//            pojos = em.createQuery("SELECT e FROM ExportPOJO e "
-//                    + "WHERE e.accountName = :acc "
-//                    + "AND e.fromError = 0 "
-//                    + "ORDER BY e.updateTimestamp DESC")
-//                    .setParameter("acc", encAccName)
-//                    .setMaxResults(1)
-//                    .getResultList();
-//
-//            if (pojos != null && !pojos.isEmpty()) {
-//                obtainedPojo = (ExportPOJO) pojos.get(0);
-//            } else {
-//                return null;
-//            }
-//        }
-//        TimestampPOJO pojo = new TimestampPOJO();
-//        pojo.updateTimestamp = obtainedPojo.getUpdateTimestamp();
-//        return pojo;
+        logger.info("lastUpdateTimestamp");
+
+        ExportPOJO obtainedPojo = null;
+
+        if (encDevId != null) {
+            try {
+                obtainedPojo = (ExportPOJO) em.createQuery("SELECT e FROM ExportPOJO e "
+                        + "WHERE e.accountName = :acc "
+                        + "AND e.deviceId = :dev "
+                        + "AND e.fromError = 0 "
+                        + "ORDER BY e.updateTimestamp DESC")
+                        .setParameter("acc", encAccName)
+                        .setParameter("dev", encDevId)
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                return null;
+            }
+        } else {
+            List<?> pojos = null;
+            pojos = em.createQuery("SELECT e FROM ExportPOJO e "
+                    + "WHERE e.accountName = :acc "
+                    + "AND e.fromError = 0 "
+                    + "ORDER BY e.updateTimestamp DESC")
+                    .setParameter("acc", encAccName)
+                    .setMaxResults(1)
+                    .getResultList();
+
+            if (pojos != null && !pojos.isEmpty()) {
+                obtainedPojo = (ExportPOJO) pojos.get(0);
+            } else {
+                return null;
+            }
+        }
+        TimestampPOJO pojo = new TimestampPOJO();
+        pojo.updateTimestamp = obtainedPojo.getUpdateTimestamp();
+        return pojo;
     }
 }
