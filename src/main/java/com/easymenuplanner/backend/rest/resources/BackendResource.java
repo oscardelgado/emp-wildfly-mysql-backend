@@ -47,10 +47,9 @@ public class BackendResource {
     	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
     	logger.info("url: " + requestURL);
     	
-    	return null;
-//    	Client client = ResteasyClientBuilder.newClient();
-//    	WebTarget target = client.target(requestURL);
-//    	return target.request().put(Entity.entity(entity, servletRequest.getContentType()));
+    	Client client = ResteasyClientBuilder.newClient();
+    	WebTarget target = client.target(requestURL);
+    	return target.request().put(Entity.entity(entity, servletRequest.getContentType()));
     }
     
     protected void redirectWithSendRedirect() {
