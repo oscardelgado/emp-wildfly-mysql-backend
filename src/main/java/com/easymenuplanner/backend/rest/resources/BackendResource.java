@@ -1,25 +1,27 @@
 package com.easymenuplanner.backend.rest.resources;
 
-import com.oscardelgado83.easymenuplanner.pojos.ExportPOJO;
-import com.oscardelgado83.easymenuplanner.pojos.TimestampPOJO;
+import java.io.IOException;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.net.URI;
-import java.util.List;
-import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.oscardelgado83.easymenuplanner.pojos.ExportPOJO;
+import com.oscardelgado83.easymenuplanner.pojos.TimestampPOJO;
 
 @Path("/")
 @Stateless
@@ -38,20 +40,15 @@ public class BackendResource {
     @Context
     protected HttpServletRequest servletRequest;
     
-    protected Response redirectWithHeader() {
+    protected Response redirectWithHeader(ExportPOJO entity) {
     	logger.info("redirect with header!");
     	
     	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
     	logger.info("url: " + requestURL);
     	
-//			servletResponse.sendRedirect(requestURL);
-		return Response.status(Status.MOVED_PERMANENTLY).location(URI.create(requestURL)).build();
-    	
-//    	logger.info("response: " + response);
-    	
-//		return response;
-//    	servletResponse.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-//        servletResponse.setHeader("Location", requestURL);
+    	Client client = new ResteasyClientBuilder().build();
+    	WebTarget target = client.target("http://localhost:8080/howtodoinjava");
+    	return target.request().post(Entity.entity(entity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
     
     protected void redirectWithSendRedirect() {
