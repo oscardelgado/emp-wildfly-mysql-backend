@@ -29,7 +29,7 @@ public class BackendResource {
 
     private final static Logger logger = LoggerFactory.getLogger(BackendResource.class);
     
-    private static final String REDIRECT_HOST = "http://easymenuplanerwildfly-ods.rhcloud.com";
+    private static final String REDIRECT_HOST = "easymenuplanerwildfly-ods.rhcloud.com";
 
     @Context
     protected HttpServletResponse servletResponse;
