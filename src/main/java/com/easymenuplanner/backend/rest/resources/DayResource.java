@@ -110,10 +110,8 @@ public class DayResource extends BackendResource {
     @Path("/")
     public Response updateDays(ExportPOJO pojo) {
     	
-    	redirectWithHeader();
+    	return redirectWithHeader();
 	    
-	    return null;
-    	
 //         logger.info("updateDays");
 //         logger.debug("pojo: {}", pojo);
 
