@@ -1,11 +1,8 @@
 package com.easymenuplanner.backend.rest.resources;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -110,7 +107,7 @@ public class DayResource extends BackendResource {
     @Path("/")
     public Response updateDays(ExportPOJO pojo) {
     	
-    	return redirectWithHeader();
+    	return redirectWithHeader(pojo);
 	    
 //         logger.info("updateDays");
 //         logger.debug("pojo: {}", pojo);
