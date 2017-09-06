@@ -19,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 @Path("/")
 @Stateless
@@ -37,18 +38,14 @@ public class BackendResource {
     @Context
     protected HttpServletRequest servletRequest;
     
-    protected void redirectWithHeader() {
+    protected Response redirectWithHeader() {
     	logger.info("redirect with header!");
     	
     	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
     	logger.info("url: " + requestURL);
     	
-//    	Response response = Response.temporaryRedirect(URI.create(requestURL)).build();
-    	try {
-			servletResponse.sendRedirect(requestURL);
-		} catch (IOException e) {
-			 logger.error(e.getMessage());
-		}
+//			servletResponse.sendRedirect(requestURL);
+		return Response.status(Status.MOVED_PERMANENTLY).location(URI.create(requestURL)).build();
     	
 //    	logger.info("response: " + response);
     	
