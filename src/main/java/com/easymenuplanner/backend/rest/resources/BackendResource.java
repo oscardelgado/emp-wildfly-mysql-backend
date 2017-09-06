@@ -37,35 +37,33 @@ public class BackendResource {
     @Context
     protected HttpServletRequest servletRequest;
     
-    protected void redirect() {
-    	logger.info("redirect!");
+    protected void redirectWithHeader() {
+    	logger.info("redirect with header!");
     	servletResponse.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
         servletResponse.setHeader("Location", REDIRECT_HOST);
     }
-//        logger.info("redirect!");
     
-//    https://stackoverflow.com/a/14951320/1464013
-//    servletResponse.setStatus(TEMPORARY_REDIRECT);
-//    servletResponse.setHeader("Location", REDIRECT_HOST);
+    protected void redirectWithSendRedirect() {
+       logger.info("redirect with sendRedirect!");
     
-//        String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
-//        if (servletRequest.getQueryString() != null) {
-//            requestURL.concat("?").concat(servletRequest.getQueryString());
-//        }
-//        
-//        try {
-//            logger.info("url: " + requestURL);
-//            servletResponse.sendRedirect(requestURL);
-//        } catch (IOException e) {
-//            logger.error(e.getMessage());
-//        }
-//    }
+       String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
+       if (servletRequest.getQueryString() != null) {
+           requestURL.concat("?").concat(servletRequest.getQueryString());
+       }
+       
+       try {
+           logger.info("url: " + requestURL);
+           servletResponse.sendRedirect(requestURL);
+       } catch (IOException e) {
+           logger.error(e.getMessage());
+       }
+   }
 
     @GET
     @Path("/last-update-timestamp")
     public TimestampPOJO lastUpdateTimestamp(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
     	
-    	redirect();
+    	redirectWithSendRedirect();
         
         return null;
     	
