@@ -14,7 +14,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -50,7 +49,7 @@ public class BackendResource {
     	
     	Client client = ResteasyClientBuilder.newClient();
     	WebTarget target = client.target(requestURL);
-    	return target.request().post(Entity.entity(entity, servletRequest.getContentType()));
+    	return target.request().put(Entity.entity(entity, servletRequest.getContentType()));
     }
     
     protected void redirectWithSendRedirect() {
