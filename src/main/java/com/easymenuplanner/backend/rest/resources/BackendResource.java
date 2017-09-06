@@ -66,42 +66,44 @@ public class BackendResource {
     public TimestampPOJO lastUpdateTimestamp(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
     	
     	redirect();
+        
+        return null;
     	
-        logger.info("lastUpdateTimestamp");
+//         logger.info("lastUpdateTimestamp");
 
-        ExportPOJO obtainedPojo = null;
+//         ExportPOJO obtainedPojo = null;
 
-        if (encDevId != null) {
-            try {
-                obtainedPojo = (ExportPOJO) em.createQuery("SELECT e FROM ExportPOJO e "
-                        + "WHERE e.accountName = :acc "
-                        + "AND e.deviceId = :dev "
-                        + "AND e.fromError = 0 "
-                        + "ORDER BY e.updateTimestamp DESC")
-                        .setParameter("acc", encAccName)
-                        .setParameter("dev", encDevId)
-                        .getSingleResult();
-            } catch (NoResultException e) {
-                return null;
-            }
-        } else {
-            List<?> pojos = null;
-            pojos = em.createQuery("SELECT e FROM ExportPOJO e "
-                    + "WHERE e.accountName = :acc "
-                    + "AND e.fromError = 0 "
-                    + "ORDER BY e.updateTimestamp DESC")
-                    .setParameter("acc", encAccName)
-                    .setMaxResults(1)
-                    .getResultList();
+//         if (encDevId != null) {
+//             try {
+//                 obtainedPojo = (ExportPOJO) em.createQuery("SELECT e FROM ExportPOJO e "
+//                         + "WHERE e.accountName = :acc "
+//                         + "AND e.deviceId = :dev "
+//                         + "AND e.fromError = 0 "
+//                         + "ORDER BY e.updateTimestamp DESC")
+//                         .setParameter("acc", encAccName)
+//                         .setParameter("dev", encDevId)
+//                         .getSingleResult();
+//             } catch (NoResultException e) {
+//                 return null;
+//             }
+//         } else {
+//             List<?> pojos = null;
+//             pojos = em.createQuery("SELECT e FROM ExportPOJO e "
+//                     + "WHERE e.accountName = :acc "
+//                     + "AND e.fromError = 0 "
+//                     + "ORDER BY e.updateTimestamp DESC")
+//                     .setParameter("acc", encAccName)
+//                     .setMaxResults(1)
+//                     .getResultList();
 
-            if (pojos != null && !pojos.isEmpty()) {
-                obtainedPojo = (ExportPOJO) pojos.get(0);
-            } else {
-                return null;
-            }
-        }
-        TimestampPOJO pojo = new TimestampPOJO();
-        pojo.updateTimestamp = obtainedPojo.getUpdateTimestamp();
-        return pojo;
+//             if (pojos != null && !pojos.isEmpty()) {
+//                 obtainedPojo = (ExportPOJO) pojos.get(0);
+//             } else {
+//                 return null;
+//             }
+//         }
+//         TimestampPOJO pojo = new TimestampPOJO();
+//         pojo.updateTimestamp = obtainedPojo.getUpdateTimestamp();
+//         return pojo;
     }
 }
