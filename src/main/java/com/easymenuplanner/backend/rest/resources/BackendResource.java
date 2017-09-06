@@ -44,10 +44,10 @@ public class BackendResource {
     	logger.info("url: " + requestURL);
     	
     	return null;
-    	
-//    	Client client = new ResteasyClientBuilder().build();
-//    	WebTarget target = client.target(requestURL);
-//    	return target.request().post(servletRequest.getContentType());
+        
+        Client client = ResteasyClientBuilder.newClient();
+    	WebTarget target = client.target(requestURL);
+    	return target.request().post(Entity.entity(entity, servletRequest.getContentType()));
     }
     
     protected void redirectWithSendRedirect() {
