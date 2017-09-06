@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,12 +108,10 @@ public class DayResource extends BackendResource {
     //TODO: change to manage only Days
     @PUT
     @Path("/")
-    public ExportPOJO updateDays(ExportPOJO pojo) {
+    public Response updateDays(ExportPOJO pojo) {
     	
-    	redirectWithHeader();
+    	return redirectWithHeader();
 	    
-	    return null;
-    	
 //         logger.info("updateDays");
 //         logger.debug("pojo: {}", pojo);
 
