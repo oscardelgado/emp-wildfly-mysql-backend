@@ -39,8 +39,12 @@ public class BackendResource {
     
     protected void redirectWithHeader() {
     	logger.info("redirect with header!");
+    	
+    	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
+    	logger.info("url: " + requestURL);
+    	
     	servletResponse.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-        servletResponse.setHeader("Location", REDIRECT_HOST);
+        servletResponse.setHeader("Location", requestURL);
     }
     
     protected void redirectWithSendRedirect() {
