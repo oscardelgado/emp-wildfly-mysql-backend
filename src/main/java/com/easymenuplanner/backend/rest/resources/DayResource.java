@@ -1,17 +1,16 @@
 package com.easymenuplanner.backend.rest.resources;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +20,7 @@ import com.oscardelgado83.easymenuplanner.pojos.ExportPOJO;
 @Stateless
 public class DayResource extends BackendResource {
 
-	private final static Logger logger = LoggerFactory.getLogger(DayResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(DayResource.class);
     private static final int MAX = 100;
     
     //TODO: change to return only Days
@@ -29,50 +28,46 @@ public class DayResource extends BackendResource {
     @Path("/")
     public ExportPOJO getDays(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
     	
-    	redirectWithSendRedirect();
-	    
-	    return null;
-    	
-//         logger.info("download");
+         logger.info("download");
 
-//         List<?> pojos = null;
+         List<?> pojos = null;
 
-//         if (encDevId != null) {
-//             try {
-//                 pojos = (List<?>) em.createQuery("SELECT e FROM ExportPOJO e "
-//                         + "WHERE e.accountName = :acc "
-//                         + "AND e.deviceId = :dev "
-//                         + "AND e.fromError = 0 "
-//                         + "ORDER BY e.updateTimestamp DESC")
-//                         .setParameter("acc", encAccName)
-//                         .setParameter("dev", encDevId)
-//                         .getSingleResult();
-//             } catch (NoResultException e) {
-//                 return null;
-//             }
-//         } else {
-//             pojos = em.createQuery("SELECT e FROM ExportPOJO e "
-//                     + "WHERE e.accountName = :acc "
-//                     + "AND e.fromError = 0 "
-//                     + "ORDER BY e.updateTimestamp DESC")
-//                     .setParameter("acc", encAccName)
-//                     .setMaxResults(1)
-//                     .getResultList();
-//         }
-//         if (pojos != null && !pojos.isEmpty()) {
-//             final ExportPOJO exportPOJO = (ExportPOJO) pojos.get(0);
+         if (encDevId != null) {
+             try {
+                 pojos = (List<?>) em.createQuery("SELECT e FROM ExportPOJO e "
+                         + "WHERE e.accountName = :acc "
+                         + "AND e.deviceId = :dev "
+                         + "AND e.fromError = 0 "
+                         + "ORDER BY e.updateTimestamp DESC")
+                         .setParameter("acc", encAccName)
+                         .setParameter("dev", encDevId)
+                         .getSingleResult();
+             } catch (NoResultException e) {
+                 return null;
+             }
+         } else {
+             pojos = em.createQuery("SELECT e FROM ExportPOJO e "
+                     + "WHERE e.accountName = :acc "
+                     + "AND e.fromError = 0 "
+                     + "ORDER BY e.updateTimestamp DESC")
+                     .setParameter("acc", encAccName)
+                     .setMaxResults(1)
+                     .getResultList();
+         }
+         if (pojos != null && !pojos.isEmpty()) {
+             final ExportPOJO exportPOJO = (ExportPOJO) pojos.get(0);
             
-// //            //FIXME: temporal fix because Proguard was changing jsonId field
-// //            //Although it works, change to a regex to keep both a and jsonId. (Mixed app versions).
-// //            if (exportPOJO.daysJSON != null) exportPOJO.daysJSON = exportPOJO.daysJSON.replace("\"a\":", "\"jsonId\":");
-// //            if (exportPOJO.coursesJSON != null) exportPOJO.coursesJSON = exportPOJO.coursesJSON.replace("\"a\":", "\"jsonId\":");
-// //            if (exportPOJO.courseIngredientJSONs != null) exportPOJO.courseIngredientJSONs = exportPOJO.courseIngredientJSONs.replace("\"a\":", "\"jsonId\":");
-// //            if (exportPOJO.ingredientJSONs != null) exportPOJO.ingredientJSONs = exportPOJO.ingredientJSONs.replace("\"a\":", "\"jsonId\":");
+ //            //FIXME: temporal fix because Proguard was changing jsonId field
+ //            //Although it works, change to a regex to keep both a and jsonId. (Mixed app versions).
+ //            if (exportPOJO.daysJSON != null) exportPOJO.daysJSON = exportPOJO.daysJSON.replace("\"a\":", "\"jsonId\":");
+ //            if (exportPOJO.coursesJSON != null) exportPOJO.coursesJSON = exportPOJO.coursesJSON.replace("\"a\":", "\"jsonId\":");
+ //            if (exportPOJO.courseIngredientJSONs != null) exportPOJO.courseIngredientJSONs = exportPOJO.courseIngredientJSONs.replace("\"a\":", "\"jsonId\":");
+ //            if (exportPOJO.ingredientJSONs != null) exportPOJO.ingredientJSONs = exportPOJO.ingredientJSONs.replace("\"a\":", "\"jsonId\":");
             
-//             return exportPOJO;
-//         } else {
-//             return null;
-//         }
+             return exportPOJO;
+         } else {
+             return null;
+         }
     }
     
      @GET
@@ -83,52 +78,37 @@ public class DayResource extends BackendResource {
             @QueryParam("count") int count
     ) {
     	 
-    	 redirectWithSendRedirect();
-	    
-	    return null;
-    	 
-//         logger.info("download");
-//         List<ExportPOJO> pojos = null;
-//         try {
-//             String sql = "SELECT e FROM ExportPOJO e "
-//                     + "WHERE e.fromError = 0 ";
-//             if (language != null) sql += "AND e.language = :language ";
-//             sql += "ORDER BY e.updateTimestamp DESC";
-//             final TypedQuery<ExportPOJO> q = em.createQuery(sql, ExportPOJO.class);
-//             if (language != null) q.setParameter("language", language);
-//             q.setFirstResult(start);
-//             q.setMaxResults((count != 0)? count : MAX);
-//             pojos = q.getResultList();
-//         } catch (NoResultException e) {
-//             return Collections.emptyList();
-//         }
-//         return pojos;
+         logger.info("download");
+         List<ExportPOJO> pojos = null;
+         try {
+             String sql = "SELECT e FROM ExportPOJO e "
+                     + "WHERE e.fromError = 0 ";
+             if (language != null) sql += "AND e.language = :language ";
+             sql += "ORDER BY e.updateTimestamp DESC";
+             final TypedQuery<ExportPOJO> q = em.createQuery(sql, ExportPOJO.class);
+             if (language != null) q.setParameter("language", language);
+             q.setFirstResult(start);
+             q.setMaxResults((count != 0)? count : MAX);
+             pojos = q.getResultList();
+         } catch (NoResultException e) {
+             return Collections.emptyList();
+         }
+         return pojos;
     }
 
     //TODO: change to manage only Days
     @PUT
     @Path("/")
-    public void updateDays(ExportPOJO pojo) {
+    public ExportPOJO updateDays(ExportPOJO pojo) {
     	
-    	logger.info("redirect with header!");
-    	logger.info("the content type is: " + servletRequest.getContentType());
-    	
-    	String requestURL = servletRequest.getRequestURL().toString().replaceAll(servletRequest.getServerName(), REDIRECT_HOST);
-    	logger.info("url: " + requestURL);
-    	
-    	Client client = ResteasyClientBuilder.newClient();
-    	WebTarget target = client.target(requestURL);
-    	target.request().put(Entity.entity(pojo, servletRequest.getContentType()));
-	    
-//         logger.info("updateDays");
-//         logger.debug("pojo: {}", pojo);
+         logger.info("updateDays");
+         logger.debug("pojo: {}", pojo);
 
-//         saveOrUpdate(pojo);
-//         return pojo;
+         return saveOrUpdate(pojo);
     }
 
-    private void saveOrUpdate(ExportPOJO pojo) {
+    private ExportPOJO saveOrUpdate(ExportPOJO pojo) {
         logger.info("saveOrUpdate");
-        em.merge(pojo);
+        return em.merge(pojo);
     }
 }
