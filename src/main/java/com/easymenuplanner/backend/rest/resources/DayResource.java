@@ -9,7 +9,9 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,6 +101,7 @@ public class DayResource extends BackendResource {
     //TODO: change to manage only Days
     @PUT
     @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
     public ExportPOJO updateDays(ExportPOJO pojo) {
     	
          logger.info("updateDays");
