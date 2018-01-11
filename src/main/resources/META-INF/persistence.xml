@@ -9,11 +9,12 @@
         <properties>
             <!--            Properties for Hibernate -->
             <property name="hibernate.show_sql" value="false"/>
-            <!--            -validate: validate the schema, makes no changes to the database.
+            <!--            
+            -validate: validate the schema, makes no changes to the database.
             -update: update the schema.
             -create: creates the schema, destroying previous data.
             -create-drop: drop the schema at the end of the session.-->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
       
             <property name="hibernate.connection.useUnicode" value="true" />
             <property name="hibernate.connection.characterEncoding" value="UTF-8" />
