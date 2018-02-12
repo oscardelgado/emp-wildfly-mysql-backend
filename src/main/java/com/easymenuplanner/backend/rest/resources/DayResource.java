@@ -102,8 +102,7 @@ public class DayResource extends BackendResource {
     //TODO: change to manage only Days
     @PUT
     @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Produces(MediaType.APPLICATION_JSON)
     public ExportPOJO updateDays(ExportPOJO pojo) {
     	
          logger.info("updateDays");
