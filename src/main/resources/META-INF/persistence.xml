@@ -18,6 +18,7 @@
       
             <property name="hibernate.connection.useUnicode" value="true" />
             <property name="hibernate.connection.characterEncoding" value="UTF-8" />
+            <property name="hibernate.connection.CharSet">utf8</property>
             
             <!-- SQL dialect -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
