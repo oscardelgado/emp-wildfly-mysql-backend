@@ -103,6 +103,7 @@ public class DayResource extends BackendResource {
     @PUT
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public ExportPOJO updateDays(ExportPOJO pojo) {
     	
          logger.info("updateDays");
