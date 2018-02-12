@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
@@ -101,7 +102,8 @@ public class DayResource extends BackendResource {
     //TODO: change to manage only Days
     @PUT
     @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public ExportPOJO updateDays(ExportPOJO pojo) {
     	
          logger.info("updateDays");
