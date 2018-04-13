@@ -17,7 +17,7 @@
 	value="${ now.time  / (1000*60*60*24) }"
 	integerOnly="true" var="nowDays" scope="request"/>
 
-	<c:import var="lastBackupDateSec" url="https://www.dropbox.com/s/ahag0gar11kdxef/last_backup_date.txt?raw=1" />
+	<c:import var="lastBackupDateSec" url="https://www.dropbox.com/s/3t5ufqxa9b9eqy1/last_backup_date.txt?raw=1" />
 	<fmt:parseNumber
 	value="${ lastBackupDateSec / (60*60*24) }"
 	integerOnly="true" var="otherDays" scope="request"/>
