@@ -23,8 +23,8 @@
 	<c:set value="${nowSec - lastBackupDateSec}" var="diffSec"/>
 
 	<c:choose>
-		<c:when test="${diffSec lte 60 * 60 * 24}">less than a day. OK</c:when>
-		<c:otherwise>${diffSect * 60 * 60} hours(s) ago. FAILED</c:otherwise>
+		<c:when test="${diffSec lte (60 * 60 * 24)}">less than a day. OK</c:when>
+		<c:otherwise>${diffSec * 60 * 60} hours(s) ago. FAILED</c:otherwise>
 	</c:choose>
 </body>
 </html>
