@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page trimDirectiveWhitespaces="true" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -12,22 +13,18 @@
 </head>
 <body bgcolor="white">
 
-	<jsp:useBean id="now" class="java.util.Date" scope="request"/>
+	<jsp:useBean id="nowSec" class="java.util.Date" scope="request"/>
 	<fmt:parseNumber
-	value="${ now.time  / (1000*60*60*24) }"
+	value="${ now.time  / 1000 }"
 	integerOnly="true" var="nowDays" scope="request"/>
 
 	<c:import var="lastBackupDateSec" url="https://www.dropbox.com/s/3t5ufqxa9b9eqy1/last_backup_date.txt?raw=1" />
-	<fmt:parseNumber
-	value="${ lastBackupDateSec / (60*60*24) }"
-	integerOnly="true" var="otherDays" scope="request"/>
 
-	<c:set value="${nowDays - otherDays}" var="dateDiff"/>
+	<c:set value="${nowSec - lastBackupDateSec}" var="diffSec"/>
 
 	<c:choose>
-	<c:when test="${dateDiff eq 0}">today</c:when>
-	<c:when test="${dateDiff eq 1}">yesterday</c:when>
-	<c:otherwise>${dateDiff} day(s) ago</c:otherwise>
-</c:choose>
+		<c:when test="${diffSec lte 60 * 60 * 24}">less than a day. OK</c:when>
+		<c:otherwise>${diffSect * 60 * 60} hours(s) ago. FAILED</c:otherwise>
+	</c:choose>
 </body>
 </html>
