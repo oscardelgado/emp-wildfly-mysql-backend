@@ -25,7 +25,7 @@
 
         <c:choose>
                 <c:when test="${diffSec / (60 * 60 * 24) lt 1}">Less than a day. OK</c:when>
-                <c:otherwise>${diffSec * 60 * 60} hours(s) ago. FAILED</c:otherwise>
+                <c:otherwise>${diffSec / (60 * 60)} hours(s) ago. FAILED</c:otherwise>
         </c:choose>
 </body>
 </html>
