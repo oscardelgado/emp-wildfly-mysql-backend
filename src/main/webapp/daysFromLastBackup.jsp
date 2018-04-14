@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Days from last backup of DB</title>
 </head>
-<body bgcolor="white">
+<body>
         <jsp:useBean id="now" class="java.util.Date" scope="request"/>
         <fmt:parseNumber
 	        value="${now.time}"
