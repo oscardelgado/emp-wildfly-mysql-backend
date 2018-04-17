@@ -2,7 +2,7 @@ package com.easymenuplanner.backend.rest.resources;
 
 import java.util.List;
 
-import javax.enterprise.inject.Produces;
+//import javax.enterprise.inject.Produces;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -72,8 +72,8 @@ public class BackendResource {
     
     @GET
     @Path("/is-alive")
-    @Produces("text/html")
-    public TimestampPOJO isAlive() {
+    //@Produces("text/html")
+    public String isAlive() {
     	
          logger.info("lastUpdateTimestamp");
 
