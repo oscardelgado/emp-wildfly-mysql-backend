@@ -2,6 +2,7 @@ package com.easymenuplanner.backend.rest.resources;
 
 import java.util.List;
 
+import javax.enterprise.inject.Produces;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -67,5 +68,31 @@ public class BackendResource {
          TimestampPOJO pojo = new TimestampPOJO();
          pojo.updateTimestamp = obtainedPojo.getUpdateTimestamp();
          return pojo;
+    }
+    
+    @GET
+    @Path("/is-alive")
+    @Produces("text/html")
+    public TimestampPOJO isAlive() {
+    	
+         logger.info("lastUpdateTimestamp");
+
+         ExportPOJO obtainedPojo = null;
+
+         List<?> pojos = null;
+         pojos = em.createQuery("SELECT e FROM ExportPOJO e "
+                 + "WHERE e.accountName = :acc "
+                 + "AND e.fromError = 0 "
+                 + "ORDER BY e.updateTimestamp DESC")
+                 .setParameter("acc", "test")
+                 .setMaxResults(1)
+                 .getResultList();
+
+         if (pojos != null && !pojos.isEmpty()) {
+             obtainedPojo = (ExportPOJO) pojos.get(0);
+         } else {
+             return null;
+         }
+         return obtainedPojo.getUpdateTimestamp();
     }
 }
