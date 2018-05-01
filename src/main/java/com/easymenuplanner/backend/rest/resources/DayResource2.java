@@ -61,7 +61,7 @@ public class DayResource2 extends BackendResource {
          if (pojos != null && !pojos.isEmpty()) {
              final ExportPOJO exportPOJO = (ExportPOJO) pojos.get(0);
            
-           exportPOJO.setDays(exportPOJO.getDaysJSONDecoded());
+           exportPOJO.setDaysJSON(exportPOJO.getDaysJSONDecoded());
            
              return exportPOJO;
          } else {
