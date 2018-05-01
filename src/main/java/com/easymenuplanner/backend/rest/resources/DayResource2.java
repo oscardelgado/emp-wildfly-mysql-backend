@@ -1,7 +1,6 @@
 
 package com.easymenuplanner.backend.rest.resources;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,8 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oscardelgado83.easymenuplanner.pojos.ExportPOJO;
-
-import java.net.URLDecoder; import java.net.URLEncoder;
 
 @Path("/days2")
 @Stateless
@@ -64,7 +61,7 @@ public class DayResource2 extends BackendResource {
          if (pojos != null && !pojos.isEmpty()) {
              final ExportPOJO exportPOJO = (ExportPOJO) pojos.get(0);
            
-           exportPOJO.setDaysJSON(decodeStringUrl(exportPOJO.getDaysJSON()));
+           exportPOJO.setDays(exportPOJO.getDaysJSONDecoded());
            
              return exportPOJO;
          } else {
@@ -82,7 +79,7 @@ public class DayResource2 extends BackendResource {
          logger.info("updateDays");
          logger.debug("pojo: {}", pojo);
       
-        pojo.setDaysJSON(encodeStringUrl(pojo.getDaysJSON()));
+        pojo.setDaysJSONEncoded(pojo.getDaysJSON());
 
          return saveOrUpdate(pojo);
   }
