@@ -50,6 +50,9 @@ public class ExportPOJO implements Serializable {
     private boolean dinnerVisible;
     private boolean dinnerSide1Visible;
     private boolean dinnerSide2Visible;
+    
+	@javax.persistence.Transient 
+	public boolean experiment = false;
 
     @Id
 	private boolean fromError;
@@ -110,27 +113,23 @@ public class ExportPOJO implements Serializable {
 
 	
 	public String getDaysJSON() {
-		return daysJSON;
+		if (experiment) {
+			return decodeStringUrl(daysJSON);
+		} else {
+			return daysJSON;
+		}
+		
 	}
 
 
 
 	public void setDaysJSON(String daysJSON) {
-		this.daysJSON = daysJSON;
+		if (experiment) {
+			this.daysJSON = encodeStringUrl(daysJSON);
+		} else {
+			this.daysJSON = daysJSON;
+		}
 	}
-
-
-	public String getDaysJSONDecoded() {
-		return decodeStringUrl(daysJSON);
-	}
-
-
-
-	public void setDaysJSONEncoded(String daysJSON) {
-		this.daysJSON = encodeStringUrl(daysJSON);
-	}
-
-
 
 	public String getCoursesJSON() {
 		return coursesJSON;
