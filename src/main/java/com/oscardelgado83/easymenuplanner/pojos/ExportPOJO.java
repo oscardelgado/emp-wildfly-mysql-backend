@@ -52,7 +52,10 @@ public class ExportPOJO implements Serializable {
     private boolean dinnerSide2Visible;
     
 	@javax.persistence.Transient 
-	public boolean experiment = false;
+	public boolean experimentGet = false;
+	
+	javax.persistence.Transient 
+	public boolean experimentSet = false;
 
     @Id
 	private boolean fromError;
@@ -113,7 +116,7 @@ public class ExportPOJO implements Serializable {
 
 	
 	public String getDaysJSON() {
-		if (experiment) {
+		if (experimentGet) {
 			return decodeStringUrl(daysJSON);
 		} else {
 			return daysJSON;
@@ -124,7 +127,7 @@ public class ExportPOJO implements Serializable {
 
 
 	public void setDaysJSON(String daysJSON) {
-		if (experiment) {
+		if (experimentSet) {
 			this.daysJSON = encodeStringUrl(daysJSON);
 		} else {
 			this.daysJSON = daysJSON;
