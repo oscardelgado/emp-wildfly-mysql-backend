@@ -88,24 +88,4 @@ public class DayResource2 extends BackendResource {
       logger.info("saveOrUpdate");
       return em.merge(pojo);
   }
-  
-  public static String encodeStringUrl(String url) {
-      String encodedUrl =null;
-      try {
-           encodedUrl = URLEncoder.encode(url, "UTF-8");
-      } catch (UnsupportedEncodingException e) {
-          return encodedUrl;
-      }
-      return encodedUrl;
-  }
-
-  public static String decodeStringUrl(String encodedUrl) {
-      String decodedUrl =null;
-      try {
-           decodedUrl = URLDecoder.decode(encodedUrl, "UTF-8");
-      } catch (UnsupportedEncodingException e) {
-          return decodedUrl;
-      }
-      return decodedUrl;
-  }
 }
