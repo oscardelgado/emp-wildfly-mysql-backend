@@ -1,6 +1,7 @@
 
 package com.easymenuplanner.backend.rest.resources;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
 
