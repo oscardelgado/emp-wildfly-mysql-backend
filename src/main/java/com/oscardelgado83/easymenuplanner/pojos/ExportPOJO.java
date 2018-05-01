@@ -108,15 +108,25 @@ public class ExportPOJO implements Serializable {
 		this.fromError = fromError;
 	}
 
-
-
+	
 	public String getDaysJSON() {
-		return decodeStringUrl(daysJSON);
+		return daysJSON;
 	}
 
 
 
 	public void setDaysJSON(String daysJSON) {
+		this.daysJSON = daysJSON;
+	}
+
+
+	public String getDaysJSONDecoded() {
+		return decodeStringUrl(daysJSON);
+	}
+
+
+
+	public void setDaysJSONEncoded(String daysJSON) {
 		this.daysJSON = encodeStringUrl(daysJSON);
 	}
 
