@@ -81,6 +81,8 @@ public class DayResource2 extends BackendResource {
       
         pojo.experimentSet = true;
 
+	    saveOrUpdate(pojo);
+	    logger.info("updateDays done");
          //return saveOrUpdate(pojo);
 	    return null;
   }
