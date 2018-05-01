@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Lob;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder; 
+import java.net.URLEncoder;
+
 @Entity
 @IdClass(ExportPojoIdClass.class)
 public class ExportPOJO implements Serializable {
@@ -107,13 +111,13 @@ public class ExportPOJO implements Serializable {
 
 
 	public String getDaysJSON() {
-		return daysJSON;
+		return decodeStringUrl(daysJSON);
 	}
 
 
 
 	public void setDaysJSON(String daysJSON) {
-		this.daysJSON = daysJSON;
+		this.daysJSON = encodeStringUrl(daysJSON);
 	}
 
 
@@ -374,5 +378,23 @@ public class ExportPOJO implements Serializable {
 		return serialVersionUID;
 	}
 	
-	
+	public static String encodeStringUrl(String url) {
+	      String encodedUrl =null;
+	      try {
+		   encodedUrl = URLEncoder.encode(url, "UTF-8");
+	      } catch (UnsupportedEncodingException e) {
+		  return encodedUrl;
+	      }
+	      return encodedUrl;
+	  }
+
+	  public static String decodeStringUrl(String encodedUrl) {
+	      String decodedUrl =null;
+	      try {
+		   decodedUrl = URLDecoder.decode(encodedUrl, "UTF-8");
+	      } catch (UnsupportedEncodingException e) {
+		  return decodedUrl;
+	      }
+	      return decodedUrl;
+	  }
 }
