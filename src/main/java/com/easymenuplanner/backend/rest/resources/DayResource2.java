@@ -80,11 +80,13 @@ public class DayResource2 extends BackendResource {
          logger.debug("pojo: {}", pojo);
       
         pojo.experimentSet = true;
-	pojo.experimentGet = true;
 
          //return saveOrUpdate(pojo);
-	    saveOrUpdate(pojo);
-	    return null;
+	    pojo = saveOrUpdate(pojo);
+	    
+	    pojo.experimentSet = false;
+	pojo.experimentGet = true;
+	    return pojo;
   }
 
   private ExportPOJO saveOrUpdate(ExportPOJO pojo) {
