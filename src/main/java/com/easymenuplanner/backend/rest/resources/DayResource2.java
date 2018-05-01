@@ -81,7 +81,8 @@ public class DayResource2 extends BackendResource {
       
         pojo.experimentSet = true;
 
-         return saveOrUpdate(pojo);
+         //return saveOrUpdate(pojo);
+	    return true;
   }
 
   private ExportPOJO saveOrUpdate(ExportPOJO pojo) {
