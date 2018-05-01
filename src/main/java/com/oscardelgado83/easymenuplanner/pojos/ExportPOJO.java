@@ -54,7 +54,7 @@ public class ExportPOJO implements Serializable {
 	@javax.persistence.Transient 
 	public boolean experimentGet = false;
 	
-	javax.persistence.Transient 
+	@javax.persistence.Transient 
 	public boolean experimentSet = false;
 
     @Id
