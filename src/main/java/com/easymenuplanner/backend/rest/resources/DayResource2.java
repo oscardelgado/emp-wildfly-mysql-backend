@@ -79,7 +79,7 @@ public class DayResource2 extends BackendResource {
          logger.info("updateDays");
          logger.debug("pojo: {}", pojo);
       
-        exportPOJO.experiment = true;
+        pojo.experiment = true;
 
          return saveOrUpdate(pojo);
   }
