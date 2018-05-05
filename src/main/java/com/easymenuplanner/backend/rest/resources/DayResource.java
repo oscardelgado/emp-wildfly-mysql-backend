@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oscardelgado83.easymenuplanner.pojos.ExportPOJO;
+import java.util.Arrays;
 
 @Path("/days")
 @Stateless
@@ -37,14 +38,14 @@ public class DayResource extends BackendResource {
 
          if (encDevId != null) {
              try {
-                 pojos = (List<?>) em.createQuery("SELECT e FROM ExportPOJO e "
+                pojos = Arrays.asList((ExportPOJO) em.createQuery("SELECT e FROM ExportPOJO e "
                          + "WHERE e.accountName = :acc "
                          + "AND e.deviceId = :dev "
                          + "AND e.fromError = 0 "
                          + "ORDER BY e.updateTimestamp DESC")
                          .setParameter("acc", encAccName)
                          .setParameter("dev", encDevId)
-                         .getSingleResult();
+                        .getSingleResult());
              } catch (NoResultException e) {
                  return null;
              }
