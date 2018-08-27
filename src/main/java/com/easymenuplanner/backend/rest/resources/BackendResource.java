@@ -46,6 +46,7 @@ public class BackendResource {
                          .setParameter("acc", encAccName)
                          .setParameter("dev", encDevId)
                          .getSingleResult();
+                 logger.info("obtainedPojo": + obtainedPojo);
              } catch (NoResultException e) {
                  return null;
              }
