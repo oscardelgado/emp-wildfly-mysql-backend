@@ -48,6 +48,7 @@ public class BackendResource {
                          .getSingleResult();
                  logger.info("obtainedPojo:" + obtainedPojo);
              } catch (NoResultException e) {
+                 logger.info("obtainedPojo: null");
                  return null;
              }
          } else {
