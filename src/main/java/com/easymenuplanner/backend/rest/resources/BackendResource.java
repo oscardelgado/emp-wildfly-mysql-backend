@@ -1,8 +1,8 @@
 package com.easymenuplanner.backend.rest.resources;
 
+import com.oscardelgado83.easymenuplanner.pojos.ExportPOJO;
+import com.oscardelgado83.easymenuplanner.pojos.TimestampPOJO;
 import java.util.List;
-
-//import javax.enterprise.inject.Produces;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -10,12 +10,8 @@ import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.oscardelgado83.easymenuplanner.pojos.ExportPOJO;
-import com.oscardelgado83.easymenuplanner.pojos.TimestampPOJO;
 
 @Path("/")
 @Stateless
@@ -46,9 +42,7 @@ public class BackendResource {
                          .setParameter("acc", encAccName)
                          .setParameter("dev", encDevId)
                          .getSingleResult();
-                 logger.info("obtainedPojo:" + obtainedPojo);
              } catch (NoResultException e) {
-                 logger.info("obtainedPojo: null");
                  return null;
              }
          } else {
@@ -74,10 +68,9 @@ public class BackendResource {
     
     @GET
     @Path("/is-alive")
-    //@Produces("text/html")
     public String isAlive() {
     	
-         logger.info("lastUpdateTimestamp");
+         logger.info("isAlive");
 
          ExportPOJO obtainedPojo = null;
 
