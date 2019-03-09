@@ -13,6 +13,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 @Entity
+@Table(name="exportpojo")
 @IdClass(ExportPojoIdClass.class)
 public class ExportPOJO implements Serializable {
 
