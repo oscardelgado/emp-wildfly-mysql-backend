@@ -1,0 +1,1 @@
+{ buildpacks: [ { uri: 'git@github.com:oscardelgado/heroku-buildpack-wildfly-mysql-private.git' }] }
