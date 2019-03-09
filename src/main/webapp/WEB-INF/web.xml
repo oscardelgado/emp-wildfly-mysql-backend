@@ -5,12 +5,4 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          metadata-complete="false">
-
-         <data-source>
-             <name>java:jboss/datasources/MySQLDS</name>
-             <class-name>com.mysql.cj.jdbc.Driver</class-name>
-             <url>jdbc:us-cdbr-iron-east-03.cleardb.net/heroku_a304a837b2c7d20</url>
-             <user>b096641c9552a0</user>
-             <password>41c2586c</password>
-         </data-source>
 </web-app>
