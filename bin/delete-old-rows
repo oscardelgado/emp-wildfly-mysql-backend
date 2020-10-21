@@ -5,4 +5,4 @@ puts "Deleting old rows..."
 dataset = DB["delete from heroku_a304a837b2c7d20.ExportPOJO where updateTimestamp < DATE_SUB(curdate(), INTERVAL 1 MONTH) and accountName <> 'test'"]
 puts "done. Deleted #{dataset.count} rows"
 optimize = DB["optimize table heroku_a304a837b2c7d20.exportpojo""
-puts "optimize: #{optimize}
+puts "optimize: #{optimize}"
