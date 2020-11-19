@@ -25,6 +25,20 @@ public class BackendResource {
     protected static final String REDIRECT_HOST = "easymenuplanerwildfly-ods.rhcloud.com";
 
     @GET
+    @Path("/count")
+    public int count() {
+    	
+         logger.info("count");
+
+         ExportPOJO obtainedPojo = null;
+
+         List<?> pojos = null;
+         int count = ((Number) em.createQuery("SELECT count(*) FROM ExportPOJO e ")
+                 .getSingleResult()).intValue();
+         return count;
+    }
+    
+    @GET
     @Path("/last-update-timestamp")
     public TimestampPOJO lastUpdateTimestamp(@QueryParam("acc") String encAccName, @QueryParam("dev") String encDevId) {
     	
