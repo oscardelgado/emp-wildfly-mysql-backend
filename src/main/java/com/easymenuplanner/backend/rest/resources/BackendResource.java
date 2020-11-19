@@ -26,7 +26,7 @@ public class BackendResource {
 
     @GET
     @Path("/count")
-    public int count() {
+    public String count() {
     	
          logger.info("count");
 
@@ -35,7 +35,12 @@ public class BackendResource {
          List<?> pojos = null;
          int count = ((Number) em.createQuery("SELECT count(*) FROM ExportPOJO e ")
                  .getSingleResult()).intValue();
-         return count;
+         
+         if (count >= 100) {
+             return String.format("%d WARNING", count);
+         } else {
+             return Integer.toString(count);
+         }
     }
     
     @GET
